@@ -10,3 +10,5 @@ function(add_data_structure TARGET)
 	add_executable(${TARGET} ${sources})
 	target_include_directories(${TARGET} PUBLIC "${CMAKE_SOURCE_DIR}/include")
 endfunction()
+
+add_data_structure(queue)
