@@ -48,6 +48,10 @@ void enqueue(Queue *queue, void *item, size_t size) {
                 return;
         }
         new->data = malloc(size);
+        if (!new->data) {
+                printf("out of memory\n");
+                return;
+        }
         memcpy(new->data, item, size);
         new->next = NULL;
 

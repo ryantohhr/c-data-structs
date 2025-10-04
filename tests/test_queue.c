@@ -2,8 +2,10 @@
 #include <stdio.h>
 
 void print_queue(Queue *queue) {
-        if (!queue)
+        if (!queue) {
+                printf("invalid queue\n");
                 return;
+        }
         Node *curr = queue->head;
         while (curr) {
                 printf("%i ", *(int *)curr->data);
