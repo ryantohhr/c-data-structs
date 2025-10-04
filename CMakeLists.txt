@@ -12,3 +12,4 @@ function(add_data_structure TARGET)
 endfunction()
 
 add_data_structure(queue)
+add_data_structure(stack)
