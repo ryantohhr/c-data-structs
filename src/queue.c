@@ -7,7 +7,7 @@
 Queue *create_queue() {
         Queue *queue = malloc(sizeof(Queue));
         if (!queue) {
-                printf("out of memory");
+                printf("out of memory\n");
                 return NULL;
         }
 
@@ -20,13 +20,13 @@ Queue *create_queue() {
 
 void free_queue(Queue *queue) {
         if (!queue) {
-                printf("invalid queue");
+                printf("invalid queue\n");
                 return;
         }
 
         Node *curr = queue->head;
 
-        while (curr->next) {
+        while (curr) {
                 Node *next = curr->next;
                 free(curr->data);
                 free(curr);
@@ -38,13 +38,13 @@ void free_queue(Queue *queue) {
 
 void enqueue(Queue *queue, void *item, size_t size) {
         if (!queue) {
-                printf("invalid queue");
+                printf("invalid queue\n");
                 return;
         }
 
         Node *new = malloc(sizeof(Node));
         if (!new) {
-                printf("out of memory");
+                printf("out of memory\n");
                 return;
         }
         new->data = malloc(size);
@@ -65,7 +65,7 @@ void enqueue(Queue *queue, void *item, size_t size) {
 
 void *deque(Queue *queue) {
         if (!queue) {
-                printf("invalid queue");
+                printf("invalid queue\n");
                 return NULL;
         }
 
@@ -80,7 +80,7 @@ void *deque(Queue *queue) {
 
 void *peek(Queue *queue) {
         if (!queue) {
-                printf("invalid queue");
+                printf("invalid queue\n");
                 return NULL;
         }
 
