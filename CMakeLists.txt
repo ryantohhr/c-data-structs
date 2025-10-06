@@ -13,3 +13,4 @@ endfunction()
 
 add_data_structure(queue)
 add_data_structure(stack)
+add_data_structure(dynamicarray)
