@@ -160,13 +160,18 @@ void *search(SinglyLinkedList *list, void *item, int *index_ptr) {
         if (item) {
                 Node *curr = list->head;
                 int *index = malloc(sizeof(int));
+                if (!index) {
+                        printf("out of memory\n");
+                        return NULL;
+                }
                 *index = 0;
-                while (curr) {
-                        if (curr->data == item) {
-                                free(index);
-
+                if (*(int *)curr->data == *(int *)item)
+                        return (void *)index;
+                while (curr->next) {
+                        if (*(int *)curr->data == *(int *)item) {
                                 return (void *)index;
                         }
+                        curr = curr->next;
                         *index += 1;
                 }
                 printf("item does not exist in array");

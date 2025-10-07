@@ -66,6 +66,13 @@ int main(void) {
         printf("Item at index 3: %d\n", *(int *)search(list, NULL, &i));
         printf("Length: %zu\n", list->length);
 
+        printf("\n--- SEARCHING WITH ITEM ---\n");
+        i = 2;
+        j = (int *)search(list, (void *)&i, NULL);
+        printf("Index of item '2': %d\n", *j);
+        free(j);
+        printf("Length: %zu\n", list->length);
+
         printf("\n--- FREEING LIST ---\n");
         free_sll(list);
 }
