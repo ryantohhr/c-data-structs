@@ -14,3 +14,4 @@ size_t get_length(DynamicArray *array);
 void *get(DynamicArray *array, int index);
 void set(DynamicArray *array, int index, void *item, size_t size);
 void push(DynamicArray *array, void *item, size_t size);
+void *pop(DynamicArray *array);

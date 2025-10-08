@@ -120,3 +120,16 @@ void push(DynamicArray *array, void *item, size_t size) {
         memcpy(copy_location, item, size);
         array->length++;
 }
+
+void *pop(DynamicArray *array) {
+        if (!array) {
+                printf("invalid array\n");
+                return NULL;
+        }
+
+        void *data =
+            (char *)array->data + (array->length - 1) * array->element_size;
+        array->length--;
+
+        return data;
+}

@@ -48,6 +48,16 @@ int main(void) {
         printf("Length of array: %zu\n", get_length(array));
         printf("Capacity of array: %zu\n", array->capacity);
 
+        printf("\n--- POPPING ITEM ---\n");
+        for (i = 0; i < 5; i++) {
+                printf("Popped: %d\n", *(int *)pop(array));
+        }
+        printf("Array after popping: ");
+        print_array(array);
+        printf("Length of array: %zu\n", get_length(array));
+        printf("Capacity of array: %zu\n", array->capacity);
+
+        printf("\n--- FREEING ARRAY ---\n");
         free_array(array);
 
         return 0;
