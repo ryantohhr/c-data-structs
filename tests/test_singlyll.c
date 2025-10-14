@@ -1,78 +1,60 @@
 #include "singlyll.h"
+#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
-
-void print_with_traverse(void *item) { printf("%d ", *(int *)item); }
 
 int main(void) {
 
         int i;
         int *j;
 
-        printf("\n--- CREATING LIST ---\n");
+        // Test create_sll
         SinglyLinkedList *list = create_sll();
+        assert(list != NULL);
 
-        printf("\n--- INSERTING ITEMS ---\n");
+        // Test insert_back
         for (i = 0; i < 5; i++) {
                 insert_back(list, &i, sizeof(i));
         }
-        printf("List after inserting: ");
-        traverse(list, &print_with_traverse);
-        printf("\n");
-        printf("Length: %zu\n", list->length);
+        assert(list->length == 5);
 
-        printf("\n--- INSERTING 3 ITEMS TO THE FRONT\n");
+        // Test insert_front
         for (i = 0; i < 3; i++) {
                 insert_front(list, &i, sizeof(i));
         }
-        printf("List after inserting: ");
-        traverse(list, print_with_traverse);
-        printf("\n");
-        printf("Length: %zu\n", list->length);
+        assert(list->length == 8);
 
-        printf("\n--- INSERTING 3 ITEMS TO THE BACK\n");
+        // Test insert_back
         for (i = 0; i < 3; i++) {
                 insert_back(list, &i, sizeof(i));
         }
-        printf("List after inserting: ");
-        traverse(list, print_with_traverse);
-        printf("\n");
-        printf("Length: %zu\n", list->length);
+        assert(list->length == 11);
 
-        printf("\n--- REMOVING 3 ITEMS FROM THE FRONT\n");
+        // Test remove_front
         for (i = 0; i < 3; i++) {
                 j = (int *)remove_front(list);
-                printf("Removed: %d\n", *j);
+                assert(*j == 2 - i);
                 free(j);
         }
-        printf("List after removing: ");
-        traverse(list, print_with_traverse);
-        printf("\n");
-        printf("Length: %zu\n", list->length);
+        assert(list->length == 8);
 
-        printf("\n--- REMOVING 3 ITEMS FROM THE BACK\n");
+        // Test remove_back
         for (i = 0; i < 3; i++) {
                 j = (int *)remove_back(list);
-                printf("Removed: %d\n", *j);
+                assert(*j == 2 - i);
                 free(j);
         }
-        printf("List after removing: ");
-        traverse(list, print_with_traverse);
-        printf("\n");
-        printf("Length: %zu\n", list->length);
 
-        printf("\n--- SEARCHING WITH INDEX ---\n");
+        // Test search
         i = 3;
-        printf("Item at index 3: %d\n", *(int *)search(list, NULL, &i));
-        printf("Length: %zu\n", list->length);
+        assert(*(int *)search(list, NULL, &i) == 3);
 
-        printf("\n--- SEARCHING WITH ITEM ---\n");
         i = 2;
         j = (int *)search(list, (void *)&i, NULL);
-        printf("Index of item '2': %d\n", *j);
+        assert(*j == 2);
         free(j);
-        printf("Length: %zu\n", list->length);
 
-        printf("\n--- FREEING LIST ---\n");
         free_sll(list);
+
+        return 0;
 }
