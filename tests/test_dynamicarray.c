@@ -1,64 +1,43 @@
 #include "dynamicarray.h"
+#include <assert.h>
 #include <stdio.h>
-
-void print_array(DynamicArray *array) {
-        if (!array) {
-                printf("invalid array\n");
-                return;
-        }
-
-        for (int i = 0; i < array->length; i++) {
-                void *ptr_to_print =
-                    (char *)array->data + i * array->element_size;
-                printf("%d ", *(int *)ptr_to_print);
-        }
-        printf("\n");
-}
 
 int main(void) {
 
         int i;
 
-        printf("\n--- CREATING ARRAY ---\n");
+        // Test create_array
         DynamicArray *array = create_array(sizeof(int));
+        assert(array != NULL);
 
-        printf("\n--- PUSHING ITEMS ---\n");
+        // Test push
         for (i = 0; i < 5; i++) {
                 push(array, &i, sizeof(int));
         }
-        printf("Array after pushing: ");
-        print_array(array);
-        printf("Length of array: %zu\n", get_length(array));
-        printf("Capacity of array: %zu\n", array->capacity);
-        printf("Element at position 3: %d\n", *(int *)get(array, 2));
+        assert(array->length == 5);
+        assert(array->capacity == 8);
 
-        printf("\n--- SETTING ELEMENT 3 to 21 ---\n");
+        // Test get
+        assert(*(int *)get(array, 2) == 2);
+
+        // Test set
         i = 21;
         set(array, 2, &i, sizeof(int));
-        printf("Array after setting: ");
-        print_array(array);
+        assert(*(int *)get(array, 2) == 21);
 
-        printf("\n--- PUSHING ITEMS PAST CAPACITY ---\n");
+        // Test resize
         for (i = 5; i < 10; i++) {
-                printf("push %d\n", i);
                 push(array, &i, sizeof(int));
         }
-        printf("Array after pushing: ");
-        print_array(array);
-        printf("Length of array: %zu\n", get_length(array));
-        printf("Capacity of array: %zu\n", array->capacity);
+        assert(array->capacity == 16);
 
-        printf("\n--- POPPING ITEM ---\n");
+        // Test pop
         for (i = 0; i < 5; i++) {
-                printf("Popped: %d\n", *(int *)pop(array));
+                assert(*(int *)pop(array) == 9 - i);
         }
-        printf("Array after popping: ");
-        print_array(array);
-        printf("Length of array: %zu\n", get_length(array));
-        printf("Capacity of array: %zu\n", array->capacity);
 
-        printf("\n--- FREEING ARRAY ---\n");
         free_array(array);
+        printf("\nALL TESTS PASSED!\n");
 
         return 0;
 }
