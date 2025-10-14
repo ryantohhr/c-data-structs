@@ -55,6 +55,7 @@ int main(void) {
         free(j);
 
         free_sll(list);
+        printf("\nALL TESTS PASSED!\n");
 
         return 0;
 }
