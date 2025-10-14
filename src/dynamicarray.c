@@ -35,15 +35,6 @@ void free_array(DynamicArray *array) {
         free(array);
 }
 
-size_t get_length(DynamicArray *array) {
-        if (!array) {
-                printf("invalid array\n");
-                return 1;
-        }
-
-        return array->length;
-}
-
 void *get(DynamicArray *array, int index) {
         if (!array) {
                 printf("invalid array\n");
@@ -51,7 +42,7 @@ void *get(DynamicArray *array, int index) {
         }
 
         if (index > array->length || index < 0) {
-                printf("invalid index: out of bounds");
+                printf("invalid index: out of bounds\n");
                 return NULL;
         }
 
@@ -85,8 +76,6 @@ void resize_array(DynamicArray *array) {
                 printf("invalid array\n");
                 return;
         }
-
-        printf("--- RESIZING ARRAY ---\n");
 
         array->capacity *= 2;
         void *new_data =
