@@ -34,9 +34,9 @@ int main(void) {
         printf("Length: %zu nodes\n", queue->length);
         printf("Peek first item: %d\n", *(int *)peek(queue));
 
-        printf("\n--- DEQUEING ITEMS ---\n");
+        printf("\n--- DEQUEUING ITEMS ---\n");
         for (i = 0; i < 2; i++) {
-                j = (int *)deque(queue);
+                j = (int *)dequeue(queue);
                 printf("Dequeued: %d\n", *j);
                 free(j);
         }

@@ -67,9 +67,14 @@ void enqueue(Queue *queue, void *item, size_t size) {
         queue->length++;
 }
 
-void *deque(Queue *queue) {
+void *dequeue(Queue *queue) {
         if (!queue) {
                 printf("invalid queue\n");
+                return NULL;
+        }
+
+        if (!queue->head) {
+                printf("empty queue\n");
                 return NULL;
         }
 
@@ -85,6 +90,11 @@ void *deque(Queue *queue) {
 void *peek(Queue *queue) {
         if (!queue) {
                 printf("invalid queue\n");
+                return NULL;
+        }
+
+        if (!queue->head) {
+                printf("empty queue\n");
                 return NULL;
         }
 

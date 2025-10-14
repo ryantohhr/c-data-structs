@@ -16,5 +16,5 @@ Queue *create_queue();
 void free_queue(Queue *queue);
 
 void enqueue(Queue *queue, void *item, size_t size);
-void *deque(Queue *queue);
+void *dequeue(Queue *queue);
 void *peek(Queue *queue);
