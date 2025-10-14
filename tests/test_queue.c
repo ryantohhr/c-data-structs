@@ -3,20 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void print_queue(Queue *queue) {
-        if (!queue) {
-                printf("invalid queue\n");
-                return;
-        }
-        Node *curr = queue->head;
-        while (curr) {
-                printf("%i ", *(int *)curr->data);
-                if (!curr->next)
-                        printf("\n");
-                curr = curr->next;
-        }
-}
-
 int main(void) {
 
         int i;
@@ -45,6 +31,7 @@ int main(void) {
         assert(queue->length == 3);
 
         free_queue(queue);
+        printf("\nALL TESTS PASSED!\n");
 
         return 0;
 }
