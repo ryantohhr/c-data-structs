@@ -1,4 +1,5 @@
 #include "stack.h"
+#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -21,34 +22,29 @@ int main(void) {
         int i;
         int *j;
 
-        printf("\n--- CREATING STACK ---\n");
+        // Test create_stack
         Stack *stack = create_stack();
+        assert(stack != NULL);
 
-        printf("\n--- PUSHING ITEMS ---\n");
+        // Test push
         for (i = 0; i < 5; i++) {
                 push(stack, &i, sizeof(int));
         }
+        assert(stack->length == 5);
 
-        printf("Stack after pushing: ");
-        print_stack(stack);
-        printf("Length: %zu nodes\n", stack->length);
-        printf("Peek first item: %d\n", *(int *)peek(stack));
+        // Test peek
+        assert(*(int *)peek(stack) == 0);
 
-        printf("\n--- POPPING ITEMS ---\n");
+        // Test pop
         for (i = 0; i < 2; i++) {
                 j = (int *)pop(stack);
-                printf("Popped: %d\n", *j);
+                assert(*j == i);
                 free(j);
+                j = NULL;
         }
+        assert(stack->length == 3);
 
-        printf("Stack after popping: ");
-        print_stack(stack);
-        printf("Length: %zu nodes\n", stack->length);
-        printf("Peek first item: %d\n", *(int *)peek(stack));
-
-        printf("\n--- FREEING QUEUE ---\n");
         free_stack(stack);
 
-        printf("END\n");
         return 0;
 }
