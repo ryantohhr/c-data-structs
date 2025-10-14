@@ -1,4 +1,5 @@
 #include "queue.h"
+#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -21,34 +22,25 @@ int main(void) {
         int i;
         int *j;
 
-        printf("\n--- CREATING QUEUE ---\n");
         Queue *queue = create_queue();
+        assert(queue != NULL);
 
-        printf("\n--- INSERTING ITEMS ---\n");
         for (int i = 0; i < 5; i++) {
                 enqueue(queue, &i, sizeof(i));
         }
+        assert(queue->length == 5);
+        assert(*(int *)peek(queue) == 0);
 
-        printf("Queue after inserting: ");
-        print_queue(queue);
-        printf("Length: %zu nodes\n", queue->length);
-        printf("Peek first item: %d\n", *(int *)peek(queue));
-
-        printf("\n--- DEQUEUING ITEMS ---\n");
         for (i = 0; i < 2; i++) {
                 j = (int *)dequeue(queue);
-                printf("Dequeued: %d\n", *j);
+                assert(*j == i);
                 free(j);
+                j = NULL;
         }
+        assert(j == NULL);
+        assert(queue->length == 3);
 
-        printf("Queue after dequeuing: ");
-        print_queue(queue);
-        printf("Length: %zu nodes\n", queue->length);
-        printf("Peek first item: %d\n", *(int *)peek(queue));
-
-        printf("\n--- FREEING QUEUE ---\n");
         free_queue(queue);
 
-        printf("END\n");
         return 0;
 }
