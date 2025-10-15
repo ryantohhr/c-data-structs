@@ -1,10 +1,12 @@
 #include "dynamicarray.h"
 #include <assert.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 int main(void) {
 
         int i;
+        int *j;
 
         // Test create_array
         DynamicArray *array = create_array(sizeof(int));
@@ -18,12 +20,16 @@ int main(void) {
         assert(array->capacity == 8);
 
         // Test get
-        assert(*(int *)get(array, 2) == 2);
+        j = (int *)get(array, 2);
+        assert(*j == 2);
+        free(j);
 
         // Test set
         i = 21;
         set(array, 2, &i, sizeof(int));
-        assert(*(int *)get(array, 2) == 21);
+        j = (int *)get(array, 2);
+        assert(*j == 21);
+        free(j);
 
         // Test resize
         for (i = 5; i < 10; i++) {
@@ -33,7 +39,9 @@ int main(void) {
 
         // Test pop
         for (i = 0; i < 5; i++) {
-                assert(*(int *)pop(array) == 9 - i);
+                j = (int *)pop(array);
+                assert(*j == 9 - i);
+                free(j);
         }
 
         free_array(array);

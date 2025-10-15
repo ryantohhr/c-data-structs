@@ -46,8 +46,14 @@ void *get(DynamicArray *array, int index) {
                 return NULL;
         }
 
-        void *result = (char *)array->data + index * array->element_size;
-        return result;
+        void *data = (char *)array->data + index * array->element_size;
+        void *return_value = malloc(array->element_size);
+        if (!return_value) {
+                printf("out of memory\n");
+                return NULL;
+        }
+        memcpy(return_value, data, array->element_size);
+        return return_value;
 }
 
 void set(DynamicArray *array, int index, void *item, size_t size) {
@@ -120,5 +126,11 @@ void *pop(DynamicArray *array) {
             (char *)array->data + (array->length - 1) * array->element_size;
         array->length--;
 
-        return data;
+        void *return_value = malloc(array->element_size);
+        if (!return_value) {
+                printf("out of memory\n");
+                return NULL;
+        }
+        memcpy(return_value, data, array->element_size);
+        return return_value;
 }
