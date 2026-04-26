@@ -12,7 +12,7 @@ HashMap *create_map() {
         HashMap *map = malloc(sizeof(HashMap));
         if (!map) {
                 printf("out of memory\n");
-                exit(EXIT_FAILURE);
+                return NULL;
         }
         map->data = calloc(STARTING_CAPACITY, sizeof(Entry));
         if (!map->data) {
@@ -91,7 +91,7 @@ void *get(HashMap *map, char *key) {
         uint64_t hash = hash_key(key);
         size_t index = (size_t)(hash & (uint64_t)(map->capacity - 1));
         while (map->data[index].key != key) {
-                index = (index + 1) % 16;
+                index = (index + 1) % map->capacity;
         }
 
         return map->data[index].value;
